@@ -3,16 +3,18 @@ from abc import ABC, abstractmethod
 from config import field_ranges
 
 
+# Abstract class for parsing strategy
 class ParsingStrategy(ABC):
 
     @abstractmethod
     def parse(self, field):
         pass
 
+    # Main parser method to parse the fields based on the symbols it has
     def string_parser(self, field, start, end):
 
         all_range = list(range(start, end + 1))
-
+        # Handle different types of field inputs
         if field == "*":
             return all_range
 
@@ -26,7 +28,7 @@ class ParsingStrategy(ABC):
 
             if "*" in base:
 
-                r = [start, end+1]
+                r = [start, end + 1]
 
                 return [i for i in range(r[0], r[-1], int(interval))]
 
@@ -46,6 +48,7 @@ class ParsingStrategy(ABC):
             return [int(field)]
 
 
+# Implementation for Minute parsing strategy
 class MinuteParsingStrategy(ParsingStrategy):
 
     def parse(self, field):
@@ -55,6 +58,7 @@ class MinuteParsingStrategy(ParsingStrategy):
         return self.string_parser(field, start, end)
 
 
+# Implementation for Hour parsing strategy
 class HourParsingStrategy(ParsingStrategy):
 
     def parse(self, field):
@@ -64,6 +68,7 @@ class HourParsingStrategy(ParsingStrategy):
         return self.string_parser(field, start, end)
 
 
+# Implementation for Day of Month parsing strategy
 class DayMonthParsingStrategy(ParsingStrategy):
 
     def parse(self, field):
@@ -73,6 +78,7 @@ class DayMonthParsingStrategy(ParsingStrategy):
         return self.string_parser(field, start, end)
 
 
+# Implementation for Month parsing strategy
 class MonthParsingStrategy(ParsingStrategy):
 
     def parse(self, field):
@@ -82,6 +88,7 @@ class MonthParsingStrategy(ParsingStrategy):
         return self.string_parser(field, start, end)
 
 
+# Implementation for Day of Week parsing strategy
 class DayOfWeekParsingStrategy(ParsingStrategy):
 
     def parse(self, field):

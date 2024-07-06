@@ -4,6 +4,7 @@ from parsing_stratgey import MonthParsingStrategy, DayMonthParsingStrategy, \
 
 class ParsingTypeFactory:
 
+    # Determine the strategy based on the type of the field
     @staticmethod
     def get_parsing_strategy(type):
         if type == "minute":
