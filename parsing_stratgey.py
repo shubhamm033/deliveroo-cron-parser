@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 
+from config import field_ranges
+
 
 class ParsingStrategy(ABC):
 
@@ -47,38 +49,43 @@ class ParsingStrategy(ABC):
 class MinuteParsingStrategy(ParsingStrategy):
 
     def parse(self, field):
-        start = 0
-        end = 60
+        minute_range = field_ranges.get("minute")
+        start = minute_range[0]
+        end = minute_range[1]
         return self.string_parser(field, start, end)
 
 
 class HourParsingStrategy(ParsingStrategy):
 
     def parse(self, field):
-        start = 1
-        end = 24
+        hour_range = field_ranges.get("hour")
+        start = hour_range[0]
+        end = hour_range[1]
         return self.string_parser(field, start, end)
 
 
 class DayMonthParsingStrategy(ParsingStrategy):
 
     def parse(self, field):
-        start = 1
-        end = 30
+        day_month_range = field_ranges.get("day_month")
+        start = day_month_range[0]
+        end = day_month_range[1]
         return self.string_parser(field, start, end)
 
 
 class MonthParsingStrategy(ParsingStrategy):
 
     def parse(self, field):
-        start = 1
-        end = 12
+        month_range = field_ranges.get("month")
+        start = month_range[0]
+        end = month_range[1]
         return self.string_parser(field, start, end)
 
 
 class DayOfWeekParsingStrategy(ParsingStrategy):
 
     def parse(self, field):
-        start = 1
-        end = 7
+        day_week_range = field_ranges.get("day_week")
+        start = day_week_range[0]
+        end = day_week_range[1]
         return self.string_parser(field, start, end)
