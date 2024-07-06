@@ -26,7 +26,7 @@ class ParsingStrategy(ABC):
 
             if "*" in base:
 
-                r = [start, end]
+                r = [start, end+1]
 
                 return [i for i in range(r[0], r[-1], int(interval))]
 
